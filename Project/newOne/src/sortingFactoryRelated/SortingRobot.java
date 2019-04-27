@@ -2,7 +2,7 @@ package sortingFactoryRelated;
 
 import java.awt.*;
 
-public class SortingRobot implements Positionable {
+public class SortingRobot extends Thread implements Positionable {
 
     private int width;
     private int height;
@@ -37,6 +37,8 @@ public class SortingRobot implements Positionable {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public void
 
 
 

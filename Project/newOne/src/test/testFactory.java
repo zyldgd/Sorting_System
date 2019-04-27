@@ -9,7 +9,7 @@ import java.util.Timer;
 public class testFactory extends JFrame {
 
     private final int windowWidth = 1240;
-    private final int windowHeight = 820;
+    private final int windowHeight = 870;
     private final int mainCanvasWidth = 1000;
     private final int mainCanvasHeight = 800;
 
