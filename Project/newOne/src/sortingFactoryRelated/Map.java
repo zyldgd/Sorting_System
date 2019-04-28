@@ -1,22 +1,29 @@
 package sortingFactoryRelated;
 
+
 import java.awt.*;
 
 
 public class Map {
-    private Route[][] Routes;
-    private int height;
-    private int width;
+    private Route[][] routes;
+    private SortingComponent[][] componentLayer;
+    private int horizontalSCale;
+    private int verticalSCale;
+    private int routeHeight;
+    private int routeWidth;
 
-    public Map(int width, int height) {
+    public Map(int horizontalSCale, int verticalSCale, int routeWidth, int routeHeight) {
         boolean up;
         boolean down;
         boolean left;
         boolean right;
-        this.Routes = new Route[height][width];
-        this.height = height;
-        this.width = width;
-        for (int h = 0; h < height; h++) {
+        this.routes = new Route[verticalSCale][horizontalSCale];
+        this.componentLayer = new SortingComponent[verticalSCale][horizontalSCale];
+        this.verticalSCale = verticalSCale;
+        this.horizontalSCale = horizontalSCale;
+        this.routeHeight = routeHeight;
+        this.routeWidth = routeWidth;
+        for (int h = 0; h < verticalSCale; h++) {
             if (h % 2 == 0) {
                 left = false;
                 right = true;
@@ -24,7 +31,7 @@ public class Map {
                 left = true;
                 right = false;
             }
-            for (int w = 0; w < width; w++) {
+            for (int w = 0; w < horizontalSCale; w++) {
                 if (w % 2 == 0) {
                     up = false;
                     down = true;
@@ -32,40 +39,55 @@ public class Map {
                     up = true;
                     down = false;
                 }
-                Route route = new Route( up, down, left, right);
+                Route route = new Route(up, down, left, right);
                 this.setRoute(route, w, h);
             }
         }
     }
 
+    public void setRoute(Route route, int x, int y) {
+        this.routes[y][x] = route;
+    }
+
     public Route getRoute(int x, int y) {
-        if (0 <= x && x < this.width && 0 <= y && y < this.height)
-            return this.Routes[y][x];
+        if (0 <= x && x < this.horizontalSCale && 0 <= y && y < this.verticalSCale)
+            return this.routes[y][x];
         return null;
     }
 
-    public void setRoute(Route route, int x, int y) {
-        this.Routes[y][x] = route;
+    public Route getRoute(Point point) {
+        return this.getRoute(point.x, point.y);
     }
 
-    public Route getNextRoute(int curX, int curY, Direction dir) {
+
+    public Point getNextPoint(Point point, Direction dir){
         switch (dir) {
             case UP:
-                return this.getRoute(curX, curY + 1);
+                return new Point(point.x, point.y + 1);
             case DOWN:
-                return this.getRoute(curX, curY - 1);
+                return new Point(point.x, point.y - 1);
             case LEFT:
-                return this.getRoute(curX + 1, curY);
+                return new Point(point.x - 1, point.y);
             case RIGHT:
-                return this.getRoute(curX - 1, curY);
+                return new Point(point.x + 1, point.y);
         }
+        return null;
+    }
+
+    public SortingComponent getComponent(Point point) {
+        return this.getComponent(point.x, point.y);
+    }
+
+    public SortingComponent getComponent(int x, int y) {
+        if (0 <= x && x < this.horizontalSCale && 0 <= y && y < this.verticalSCale)
+            return this.componentLayer[y][x];
         return null;
     }
 
     public void print() {
         String s;
-        for (int y = this.height - 1; y >= 0; y--) {
-            for (int x = 0; x < this.width; x++) {
+        for (int y = this.verticalSCale - 1; y >= 0; y--) {
+            for (int x = 0; x < this.horizontalSCale; x++) {
                 s = "";
                 if (this.getRoute(x, y).isUpOut()) {
                     s += "↑";
@@ -87,7 +109,15 @@ public class Map {
     }
 
     public static void main(String[] args) {
-        Map m = new Map(5, 10);
+        Map m = new Map(5, 10, 10, 10);
         m.print();
+    }
+
+    public int getRouteHeight() {
+        return routeHeight;
+    }
+
+    public int getRouteWidth() {
+        return routeWidth;
     }
 }

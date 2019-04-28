@@ -2,7 +2,7 @@ package sortingFactoryRelated;
 
 import java.awt.Point;
 
-enum Direction{
+enum Direction {
     UP,
     DOWN,
     LEFT,
@@ -16,7 +16,8 @@ public class Route {
     private boolean leftOut;
     private boolean rightOut;
 
-    public Route(boolean up, boolean down, boolean left, boolean right){
+
+    public Route(boolean up, boolean down, boolean left, boolean right) {
         this.upOut = up;
         this.downOut = down;
         this.leftOut = left;
@@ -37,6 +38,24 @@ public class Route {
 
     public boolean isRightOut() {
         return this.rightOut;
+    }
+
+    public static void setAsNextPoint(Point point, Direction dir) {
+        switch (dir) {
+            case UP:
+                point.y += 1;
+                break;
+            case DOWN:
+                point.y -= 1;
+                break;
+            case LEFT:
+                point.x -= 1;
+                break;
+            case RIGHT:
+                point.x += 1;
+                break;
+        }
+
     }
 
 }

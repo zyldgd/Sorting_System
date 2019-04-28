@@ -3,6 +3,8 @@ package sortingFactoryRelated;
 import java.awt.*;
 
 public interface Positionable {
-    Point getPosition();
-    Boolean setPosition(Point p);
+    public Point getPosition();
+    public Boolean setPosition(Point position);
+    public Point getLocation();
+    public Boolean setLocation(Point location);
 }
