@@ -1,21 +1,14 @@
 package sortingFactoryRelated;
 
-import com.google.gson.annotations.SerializedName;
 
 import java.awt.*;
 import java.util.HashSet;
 
 
 public class Map {
-    @SerializedName("horizontalSCale")
     private int horizontalSCale;
-
-    @SerializedName("verticalSCale")
     private int verticalSCale;
-    @SerializedName("routes")
     private Route[][] routes;
-
-    @SerializedName("fixedLayer")
     private HashSet<SortingComponent> fixedLayer;
 
     public Map(int horizontalSCale, int verticalSCale) {
