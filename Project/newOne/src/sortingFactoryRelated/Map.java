@@ -1,28 +1,32 @@
 package sortingFactoryRelated;
 
+import com.google.gson.annotations.SerializedName;
 
 import java.awt.*;
+import java.util.HashSet;
 
 
 public class Map {
-    private Route[][] routes;
-    private SortingComponent[][] componentLayer;
+    @SerializedName("horizontalSCale")
     private int horizontalSCale;
-    private int verticalSCale;
-    private int routeHeight;
-    private int routeWidth;
 
-    public Map(int horizontalSCale, int verticalSCale, int routeWidth, int routeHeight) {
+    @SerializedName("verticalSCale")
+    private int verticalSCale;
+    @SerializedName("routes")
+    private Route[][] routes;
+
+    @SerializedName("fixedLayer")
+    private HashSet<SortingComponent> fixedLayer;
+
+    public Map(int horizontalSCale, int verticalSCale) {
         boolean up;
         boolean down;
         boolean left;
         boolean right;
         this.routes = new Route[verticalSCale][horizontalSCale];
-        this.componentLayer = new SortingComponent[verticalSCale][horizontalSCale];
+        this.fixedLayer = new HashSet<SortingComponent>();
         this.verticalSCale = verticalSCale;
         this.horizontalSCale = horizontalSCale;
-        this.routeHeight = routeHeight;
-        this.routeWidth = routeWidth;
         for (int h = 0; h < verticalSCale; h++) {
             if (h % 2 == 0) {
                 left = false;
@@ -59,7 +63,6 @@ public class Map {
         return this.getRoute(point.x, point.y);
     }
 
-
     public Point getNextPoint(Point point, Direction dir){
         switch (dir) {
             case UP:
@@ -79,8 +82,6 @@ public class Map {
     }
 
     public SortingComponent getComponent(int x, int y) {
-        if (0 <= x && x < this.horizontalSCale && 0 <= y && y < this.verticalSCale)
-            return this.componentLayer[y][x];
         return null;
     }
 
@@ -109,15 +110,8 @@ public class Map {
     }
 
     public static void main(String[] args) {
-        Map m = new Map(5, 10, 10, 10);
+        Map m = new Map(5, 10);
         m.print();
     }
 
-    public int getRouteHeight() {
-        return routeHeight;
-    }
-
-    public int getRouteWidth() {
-        return routeWidth;
-    }
 }

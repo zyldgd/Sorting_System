@@ -11,7 +11,7 @@ public class SortingZone {
     private ArrayList<SortingComponent> sortingComponents;
 
     public SortingZone(int width, int height) {
-        this.map = new Map(width, height, 10, 10);
+        this.map = new Map(width, height);
         this.width = width;
         this.height = height;
     }
