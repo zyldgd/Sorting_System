@@ -2,6 +2,7 @@ package sortingFactoryRelated;
 
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.HashSet;
 
 
@@ -9,7 +10,7 @@ public class Map {
     private int horizontalSCale;
     private int verticalSCale;
     private Route[][] routes;
-    private HashSet<SortingComponent> fixedLayer;
+    private HashMap<Integer, SortingComponent> fixedLayer;
 
     public Map(int horizontalSCale, int verticalSCale) {
         boolean up;
@@ -17,7 +18,7 @@ public class Map {
         boolean left;
         boolean right;
         this.routes = new Route[verticalSCale][horizontalSCale];
-        this.fixedLayer = new HashSet<SortingComponent>();
+        this.fixedLayer = new HashMap<Integer, SortingComponent>();
         this.verticalSCale = verticalSCale;
         this.horizontalSCale = horizontalSCale;
         for (int h = 0; h < verticalSCale; h++) {
@@ -28,6 +29,8 @@ public class Map {
                 left = true;
                 right = false;
             }
+
+
             for (int w = 0; w < horizontalSCale; w++) {
                 if (w % 2 == 0) {
                     up = false;
@@ -40,6 +43,23 @@ public class Map {
                 this.setRoute(route, w, h);
             }
         }
+        for (int h = 0; h < verticalSCale; h++) {
+            for (int w = 0; w < horizontalSCale; w++) {
+                if (h == (verticalSCale - 1)) {
+                    this.getRoute(w, h).setUpOut(false);
+                }
+                if (w == (horizontalSCale - 1)) {
+                    this.getRoute(w, h).setRightOut(false);
+                }
+                if (h == 0) {
+                    this.getRoute(w, h).setDownOut(false);
+                }
+                if (w == 0) {
+                    this.getRoute(w, h).setLeftOut(false);
+                }
+            }
+        }
+
     }
 
     public void setRoute(Route route, int x, int y) {
@@ -56,7 +76,7 @@ public class Map {
         return this.getRoute(point.x, point.y);
     }
 
-    public Point getNextPoint(Point point, Direction dir){
+    public Point getNextPoint(Point point, Direction dir) {
         switch (dir) {
             case UP:
                 return new Point(point.x, point.y + 1);
@@ -76,6 +96,35 @@ public class Map {
 
     public SortingComponent getComponent(int x, int y) {
         return null;
+    }
+
+    public boolean isPassable(Point point, Direction dir) {
+        boolean out = false;
+        if (this.getRoute(point) != null) {
+            switch (dir) {
+                case UP:
+                    out = this.getRoute(point).isUpOut();
+                    break;
+                case DOWN:
+                    out = this.getRoute(point).isDownOut();
+                    break;
+                case LEFT:
+                    out = this.getRoute(point).isLeftOut();
+                    break;
+                case RIGHT:
+                    out = this.getRoute(point).isRightOut();
+                    break;
+            }
+        }
+        return out;
+    }
+
+    public static int getDistance(Point p1, Point p2, Direction dir)
+    {
+        if (dir.equals(Direction.UP) || dir.equals(Direction.DOWN))
+            return Math.abs(p1.y - p2.y);
+        else
+            return Math.abs(p1.x - p2.x);
     }
 
     public void print() {
@@ -103,7 +152,7 @@ public class Map {
     }
 
     public static void main(String[] args) {
-        Map m = new Map(5, 10);
+        Map m = new Map(6, 10);
         m.print();
     }
 

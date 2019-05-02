@@ -41,30 +41,6 @@ public class SortingZone {
         return this.map;
     }
 
-    public boolean isPassable(Point point, Direction dir) {
-        Point nextPoint = this.map.getNextPoint(point, dir);
-        if (this.map.getRoute(nextPoint) != null) {
-            boolean out = false;
-            switch (dir) {
-                case UP:
-                    out = this.map.getRoute(point).isUpOut();
-                    break;
-                case DOWN:
-                    out = this.map.getRoute(point).isDownOut();
-                    break;
-                case LEFT:
-                    out = this.map.getRoute(point).isLeftOut();
-                    break;
-                case RIGHT:
-                    out = this.map.getRoute(point).isRightOut();
-                    break;
-            }
-            // 路径存在 且 没有障碍物
-            return out && (this.map.getComponent(nextPoint) == null ||
-                    this.map.getComponent(nextPoint) instanceof PickUpStation ||
-                    this.map.getComponent(nextPoint) instanceof ChargingStation);
-        }
-        return false;
-    }
+
 
 }

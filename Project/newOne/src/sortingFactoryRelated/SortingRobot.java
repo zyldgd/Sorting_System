@@ -24,7 +24,6 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         }
     }
 
-
     private boolean initRoutes(Point origination, Point destination) {
         this.routes.clear();
         Point originationTemp = new Point(origination);
@@ -55,30 +54,67 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         }
     }
 
-    public static void main(String[] args) {
-        SortingRobot robot = new SortingRobot(1);
-        SortingZone zone = new SortingZone(20, 20);
-        robot.setDependOnSortingZone(zone);
-
-        robot.initRoutes(new Point(0, 0), new Point(10, 10));
-
-
-    }
-
 
     @Override
     public Queue<Direction> routeSearch(Point origination, Point destination) {
-        Queue<Direction> routes = new LinkedList<Direction>();
-        Set<Point> openedTable = new HashSet<Point>();
-        Set<Point> closedTable = new HashSet<Point>();
+        if (origination.equals(destination)) {
+            return null;
+        } else {
+            Point originationTemp = new Point(origination);
+            Queue<Direction> routesTemp = new LinkedList<Direction>();
+            Map map = this.dependOnSortingZone.getMap();
+            int height;
+            int width;
+            Direction dir;
+            while (!originationTemp.equals(destination)) {
+                height = originationTemp.y - destination.y;
+                width = originationTemp.x - destination.x;
+                // 求得最优移动方向
+                if (Math.abs(height) > Math.abs(width)) {
+                    dir = height > 0 ? Direction.DOWN : Direction.UP;
+                } else {
+                    dir = width > 0 ? Direction.LEFT : Direction.RIGHT;
+                }
+                // 检查最优方向是否可通行
+                if (map.isPassable(originationTemp, dir)) {
+                    while (map.isPassable(originationTemp, dir) && Map.getDistance(originationTemp,destination,dir)>0) {
+                        Route.setAsNextPoint(originationTemp, dir);
+                        routesTemp.add(dir);
+                    }
+                } else {
+                    Route r = map.getRoute(originationTemp);
+                    // 检查是否只有唯一通路
+                    if (r.numberOfPassable() == 1) {
+                        dir = r.getOnePassableDirection();
+                        Route.setAsNextPoint(originationTemp, dir);
+                        routesTemp.add(dir);
+                    } else {
+                        dir = r.getOtherPassableDirection(dir);
+                        Route.setAsNextPoint(originationTemp, dir);
+                        routesTemp.add(dir);
+                    }
+                }
+            }
+            return routesTemp;
+        }
 
-
-
-        return null;
     }
 
     @Override
     public void run() {
         this.act();
+    }
+
+
+    public static void main(String[] args) {
+        SortingRobot robot = new SortingRobot(1);
+        SortingZone zone = new SortingZone(20, 20);
+        robot.setDependOnSortingZone(zone);
+        zone.getMap().print();
+        Queue<Direction> lines =  robot.routeSearch(new Point(0, 0), new Point(14, 13));
+        for (Direction D: lines) {
+            System.out.println(D);
+        }
+        System.out.println(1);
     }
 }
