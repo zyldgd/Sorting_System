@@ -108,10 +108,10 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
 
     public static void main(String[] args) {
         SortingRobot robot = new SortingRobot(1);
-        SortingZone zone = new SortingZone(20, 20);
+        SortingZone zone = new SortingZone(6, 6);
         robot.setDependOnSortingZone(zone);
         zone.getMap().print();
-        Queue<Direction> lines =  robot.routeSearch(new Point(0, 0), new Point(14, 13));
+        Queue<Direction> lines =  robot.routeSearch(new Point(2, 1), new Point(0, 2));
         for (Direction D: lines) {
             System.out.println(D);
         }
