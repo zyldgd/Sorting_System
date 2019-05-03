@@ -14,6 +14,9 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
     private int speed;
     private int spin;
     private Direction direction;
+    private int process;
+    private int efficiency;
+
 
     private Pack pack;
     private Queue<Direction> routes;
@@ -29,6 +32,7 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         this.spin = 5; // 5 degree/FPS
         this.direction = Direction.UP;
         this.degree = 0;
+        this.process = 0;
     }
 
 
@@ -113,9 +117,22 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
 
     }
 
+    private void stop(){
+        try {
+            Thread.sleep(delay);// 50FPS
+        } catch (InterruptedException e) {
+            // e.printStackTrace();
+        }
+    }
+
     private void goToPickUpStation(int pickUpStationID) {
         Point p = this.dependOnSortingZone.getSortingComponent(pickUpStationID).getLocation();
         this.initRoutes(this.getLocation(), p);
+        for (Direction dir : this.routes) {
+            turn(dir);
+
+            move(dir);
+        }
     }
 
     private void goToPutDownStation(int putDownStationID) {
@@ -208,11 +225,6 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         System.out.println("---------------------");
         robot.turn(Direction.UP);
         System.out.println("---------------------");
-        robot.turn(Direction.RIGHT);
-        System.out.println("---------------------");
-        robot.turn(Direction.LEFT);
-        System.out.println("---------------------");
-        robot.turn(Direction.RIGHT);
-        System.out.println("---------------------");
+
     }
 }
