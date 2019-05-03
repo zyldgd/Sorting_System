@@ -2,35 +2,51 @@ package sortingFactoryRelated;
 
 import java.awt.*;
 
-public class SortingComponent implements Positionable{
-    public int ID;
-    public Point position;
-    public Point location;
-    public int degree = 0; // Clockwise
+public class SortingComponent implements Positionable {
+    protected int ID;
+    protected Point position;
+    protected Point location;
+    protected int degree; // Clockwise
     protected SortingZone dependOnSortingZone;
 
 
-    @Override
-    public Point getPosition() {
-        return this.position;
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     @Override
-    public Boolean setPosition(Point position) {
+    public Point getPosition() {
+        return position;
+    }
+
+    @Override
+    public void setPosition(Point position) {
         this.position = position;
-        return null;
     }
 
     @Override
     public Point getLocation() {
-        return null;
+        return location;
     }
 
     @Override
-    public Boolean setLocation(Point location) {
-        return null;
+    public void setLocation(Point location) {
+        this.location = location;
     }
 
+    @Override
+    public int getDegree() {
+        return degree;
+    }
+
+    @Override
+    public void setDegree(int degree) {
+        this.degree = degree;
+    }
 
     public SortingZone getDependOnSortingZone() {
         return dependOnSortingZone;
@@ -43,7 +59,15 @@ public class SortingComponent implements Positionable{
 
 
 class ChargingStation extends SortingComponent {
+    private int chargingPower;
 
+    public ChargingStation(int chargingPower){
+        this.chargingPower = chargingPower;
+    }
+
+    public int getChargingPower() {
+        return chargingPower;
+    }
 }
 
 class PutDownStation extends SortingComponent {

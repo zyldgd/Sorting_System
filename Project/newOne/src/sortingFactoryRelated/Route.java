@@ -89,19 +89,19 @@ public class Route {
         return null;
     }
 
-    public static void setAsNextPoint(Point point, Direction dir) {
+    public static void setAsNextPoint(Point point, Direction dir, int scale) {
         switch (dir) {
             case UP:
-                point.y += 1;
+                point.y += scale;
                 break;
             case DOWN:
-                point.y -= 1;
+                point.y -= scale;
                 break;
             case LEFT:
-                point.x -= 1;
+                point.x -= scale;
                 break;
             case RIGHT:
-                point.x += 1;
+                point.x += scale;
                 break;
         }
 
