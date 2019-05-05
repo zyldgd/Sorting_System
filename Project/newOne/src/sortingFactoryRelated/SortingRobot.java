@@ -10,7 +10,6 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
     final int FPS = 50;
     final int delay = 1000 / this.FPS;
 
-
     private int speed;
     private int spin;
     private Direction direction;
@@ -33,17 +32,20 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         this.direction = Direction.UP;
         this.degree = 0;
         this.process = 0;
-    }
 
+        this.setLocation(new Point(0, 0));
+        this.setPosition(new Point(0, 0));
+    }
 
     private boolean initRoutes(Point origination, Point destination) {
         if (this.dependOnSortingZone == null)
             return false;
-        this.routes.clear();
         Queue<Direction> lines = this.routeSearch(origination, destination);
         this.routes = lines;
         return true;
     }
+
+    /******************************** 行为方法 ********************************/
 
     private void loadPack(Pack pack) {
         if (this.pack == null) {
@@ -57,12 +59,13 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         }
     }
 
-    private void charing() {
+    private void charging() {
 
     }
 
     private void turn(Direction dir) {
         if (this.direction != dir) {
+            System.out.println("-----turn-----");
             int degreeTemp = 0;
             int degreeErr = 0;
             switch (dir) {
@@ -90,34 +93,54 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
                 } else if (degree >= 360) {
                     this.degree -= 360;
                 }
-                System.out.println(this.degree);
-
-                try {
-                    Thread.sleep(delay);// 50FPS
-                } catch (InterruptedException e) {
-                    // e.printStackTrace();
-                }
+                // System.out.println(this.degree);
+                this.stop();
             }
             this.direction = dir;
         }
     }
 
-    private void move(Direction dir) {
+    private void step(Direction dir) {
+        boolean obstacle = false;
         Point p = new Point(this.position);
+        Point l = new Point(this.location);
         Route.setAsNextPoint(p, dir, this.dependOnSortingZone.getScale());
-        while (!this.position.equals(p)) {
-            System.out.println(this.position);
-            Route.setAsNextPoint(this.position, dir, this.speed);
-            try {
-                Thread.sleep(delay);// 50FPS
-            } catch (InterruptedException e) {
-                // e.printStackTrace();
+        Route.setAsNextPoint(l, dir, 1);
+
+        if (dir == Direction.LEFT || dir == Direction.RIGHT) {
+            Direction nextNodeDir = this.dependOnSortingZone.getMap().getRoute(l).getOtherPassableDirection(dir);
+            if (nextNodeDir == Direction.UP) {
+                obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
+                obstacle |= this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y - 1);
             }
+            else if (nextNodeDir == Direction.DOWN){
+                obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
+                obstacle |= this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y + 1);
+            }
+        } else {
+            obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
         }
 
+        if (obstacle) {
+            this.stop();
+            return;
+        }
+
+        // 更新位置
+        this.setLocation(l);
+        this.dependOnSortingZone.getMap().setRobotLayer(false, this.location.x, this.location.y);
+        this.dependOnSortingZone.getMap().setRobotLayer(true, this.location.x, this.location.y);
+
+        while (!this.position.equals(p)) {
+            //System.out.println(this.position);
+            Route.setAsNextPoint(this.position, dir, this.speed);
+            this.stop();
+        }
+
+        this.power--;
     }
 
-    private void stop(){
+    private void stop() {
         try {
             Thread.sleep(delay);// 50FPS
         } catch (InterruptedException e) {
@@ -125,23 +148,30 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         }
     }
 
-    private void goToPickUpStation(int pickUpStationID) {
-        Point p = this.dependOnSortingZone.getSortingComponent(pickUpStationID).getLocation();
-        this.initRoutes(this.getLocation(), p);
-        for (Direction dir : this.routes) {
-            turn(dir);
-
-            move(dir);
+    private void move() {
+        if (this.routes != null) {
+            for (Direction dir : this.routes) {
+                turn(dir);
+                System.out.println(dir);
+                step(dir);
+            }
         }
     }
 
-    private void goToPutDownStation(int putDownStationID) {
+    private void goToPickUpStation() {
+        int pickUpStationID = 101;
+        Point p = this.dependOnSortingZone.getMap().getComponent(pickUpStationID).getLocation();
+        this.initRoutes(this.getLocation(), p);
+        this.move();
+    }
+
+    private void goToPutDownStation() {
         Point p = this.dependOnSortingZone.getSortingComponent(putDownStationID).getLocation();
         this.initRoutes(this.getLocation(), p);
     }
 
-    private void goToCharingStation(int charingStationID) {
-        Point p = this.dependOnSortingZone.getSortingComponent(charingStationID).getLocation();
+    private void goToCharingStation() {
+        Point p = this.dependOnSortingZone.getSortingComponent(chargingStationID).getLocation();
         this.initRoutes(this.getLocation(), p);
     }
 
@@ -216,15 +246,14 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
     public static void main(String[] args) {
         SortingZone zone = new SortingZone(6, 6);
         SortingRobot robot = new SortingRobot(1, zone);
+        zone.getMap().print();
 
-        robot.setLocation(new Point(0, 0));
-        robot.setPosition(new Point(0, 0));
 
-        //robot.move(Direction.UP);
-        robot.turn(Direction.DOWN);
-        System.out.println("---------------------");
-        robot.turn(Direction.UP);
-        System.out.println("---------------------");
+
+        Thread R1 = new Thread(robot);
+        R1.start();
 
     }
 }
+
+

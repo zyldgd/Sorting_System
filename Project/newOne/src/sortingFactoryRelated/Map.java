@@ -10,7 +10,8 @@ public class Map {
     private int horizontalSCale;
     private int verticalSCale;
     private Route[][] routes;
-    private HashMap<Integer, SortingComponent> fixedLayer;
+    private boolean[][] robotLayer;
+    private HashMap<Integer, SortingComponent> sortingComponents;
 
     public Map(int horizontalSCale, int verticalSCale) {
         boolean up;
@@ -18,7 +19,8 @@ public class Map {
         boolean left;
         boolean right;
         this.routes = new Route[verticalSCale][horizontalSCale];
-        this.fixedLayer = new HashMap<Integer, SortingComponent>();
+        this.robotLayer = new boolean[verticalSCale][horizontalSCale];
+        this.sortingComponents = new HashMap<Integer, SortingComponent>();
         this.verticalSCale = verticalSCale;
         this.horizontalSCale = horizontalSCale;
         for (int h = 0; h < verticalSCale; h++) {
@@ -62,6 +64,24 @@ public class Map {
 
     }
 
+    public boolean isPassable(Point point, Direction dir) {
+        if (this.getRoute(point) != null) {
+            return this.getRoute(point).passable(dir);
+        }
+        return false;
+    }
+
+    public void setRobotLayer(boolean isRobot, int x, int y) {
+        if (0 <= x && x < this.horizontalSCale && 0 <= y && y < this.verticalSCale)
+            this.robotLayer[y][x] = isRobot;
+    }
+
+    public boolean getRobotLayer(int x, int y) {
+        if (0 <= x && x < this.horizontalSCale && 0 <= y && y < this.verticalSCale)
+            return this.robotLayer[y][x];
+        return false;
+    }
+
     public void setRoute(Route route, int x, int y) {
         this.routes[y][x] = route;
     }
@@ -90,37 +110,11 @@ public class Map {
         return null;
     }
 
-    public SortingComponent getComponent(Point point) {
-        return this.getComponent(point.x, point.y);
+    public SortingComponent getComponent(int componentID) {
+        return this.sortingComponents.get(componentID) ;
     }
 
-    public SortingComponent getComponent(int x, int y) {
-        return null;
-    }
-
-    public boolean isPassable(Point point, Direction dir) {
-        boolean out = false;
-        if (this.getRoute(point) != null) {
-            switch (dir) {
-                case UP:
-                    out = this.getRoute(point).isUpOut();
-                    break;
-                case DOWN:
-                    out = this.getRoute(point).isDownOut();
-                    break;
-                case LEFT:
-                    out = this.getRoute(point).isLeftOut();
-                    break;
-                case RIGHT:
-                    out = this.getRoute(point).isRightOut();
-                    break;
-            }
-        }
-        return out;
-    }
-
-    public static int getDistance(Point p1, Point p2, Direction dir)
-    {
+    public static int getDistance(Point p1, Point p2, Direction dir) {
         if (dir.equals(Direction.UP) || dir.equals(Direction.DOWN))
             return Math.abs(p1.y - p2.y);
         else

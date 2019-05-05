@@ -9,26 +9,12 @@ public class SortingZone {
     private int width;
     private int height;
     private ArrayList<SortingRobot> sortingRobots;
-    private ArrayList<SortingComponent> sortingComponents;
 
     public SortingZone(int width, int height) {
         this.map = new Map(width, height);
         this.width = width;
         this.height = height;
         this.scale = 100;// 100/route
-    }
-
-
-    public SortingComponent getSortingComponent(int ID) {
-        return this.sortingComponents.get(ID);
-    }
-
-    public void addSortingComponent(SortingComponent sortingComponent) {
-        this.sortingComponents.add(sortingComponent);
-    }
-
-    public void removeSortingComponent(int ID) {
-        this.sortingComponents.remove(ID);
     }
 
     public SortingRobot getSortingRobot(int ID) {

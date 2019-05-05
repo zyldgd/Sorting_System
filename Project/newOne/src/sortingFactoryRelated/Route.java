@@ -62,6 +62,20 @@ public class Route {
         return sum;
     }
 
+    public boolean passable(Direction dir) {
+        switch (dir) {
+            case UP:
+                return this.isUpOut();
+            case DOWN:
+                return this.isDownOut();
+            case LEFT:
+                return this.isLeftOut();
+            case RIGHT:
+                return this.isRightOut();
+        }
+        return false;
+    }
+
     public Direction getOnePassableDirection() {
         if (this.upOut)
             return Direction.UP;
