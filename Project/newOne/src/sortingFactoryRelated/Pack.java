@@ -1,27 +1,21 @@
 package sortingFactoryRelated;
 
 public class Pack {
-    private int ID;
-    private int origination;
-    private int destination;
+    private Integer originationID;
+    private Integer destinationID;
 
 
-    public Pack(int ID, int origination,int destination){
-        this.ID = ID;
-        this.origination = origination;
-        this.destination = destination;
+    public Pack(Integer originationID, Integer destinationID) {
+        this.originationID = originationID;
+        this.destinationID = destinationID;
     }
 
-    public int getID() {
-        return ID;
+    public Integer getOrigination() {
+        return originationID;
     }
 
-    public int getOrigination() {
-        return origination;
-    }
-
-    public int getDestination() {
-        return destination;
+    public Integer getDestination() {
+        return destinationID;
     }
 
 

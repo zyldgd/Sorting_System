@@ -22,19 +22,16 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
     private int power;// 当前电量
     private int capacitance;// 电容量
 
-    public SortingRobot(int ID, SortingZone zone) {
-        this.ID = ID;
+
+    public SortingRobot(Point location, SortingZone dependOnSortingZone) {
+        super(location, dependOnSortingZone);
         this.power = 500;
         this.capacitance = 500;
-        this.dependOnSortingZone = zone;
+        this.dependOnSortingZone = dependOnSortingZone;
         this.speed = this.dependOnSortingZone.getScale() / 10;   // 10 p/FPS
         this.spin = 5; // 5 degree/FPS
         this.direction = Direction.UP;
-        this.degree = 0;
         this.process = 0;
-
-        this.setLocation(new Point(0, 0));
-        this.setPosition(new Point(0, 0));
     }
 
     private boolean initRoutes(Point origination, Point destination) {
@@ -47,9 +44,10 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
 
     /******************************** 行为方法 ********************************/
 
-    private void loadPack(Pack pack) {
+    private void loadPack(int pickUpStationID) {
         if (this.pack == null) {
-            this.pack = pack;
+            PickUpStation pickUpStation = (PickUpStation) this.dependOnSortingZone.getMap().getComponent("pickUpStation", pickUpStationID);
+            this.pack = pickUpStation.getPack();
         }
     }
 
@@ -61,11 +59,11 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
 
     private void charging() {
 
+
     }
 
     private void turn(Direction dir) {
         if (this.direction != dir) {
-            System.out.println("-----turn-----");
             int degreeTemp = 0;
             int degreeErr = 0;
             switch (dir) {
@@ -82,6 +80,7 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
                     degreeTemp = 90;
                     break;
             }
+
             while (this.degree != degreeTemp) {
                 degreeErr = (degreeTemp - this.degree > 0) ? this.spin : -this.spin;
                 if (Math.abs(degreeTemp - this.degree) > 180) {
@@ -112,8 +111,7 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
             if (nextNodeDir == Direction.UP) {
                 obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
                 obstacle |= this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y - 1);
-            }
-            else if (nextNodeDir == Direction.DOWN){
+            } else if (nextNodeDir == Direction.DOWN) {
                 obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
                 obstacle |= this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y + 1);
             }
@@ -123,13 +121,14 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
 
         if (obstacle) {
             this.stop();
+            System.out.println("obstacle");
             return;
         }
 
         // 更新位置
-        this.setLocation(l);
         this.dependOnSortingZone.getMap().setRobotLayer(false, this.location.x, this.location.y);
-        this.dependOnSortingZone.getMap().setRobotLayer(true, this.location.x, this.location.y);
+        this.dependOnSortingZone.getMap().setRobotLayer(true, l.x, l.y);
+        this.setLocation(l);
 
         while (!this.position.equals(p)) {
             //System.out.println(this.position);
@@ -152,42 +151,51 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         if (this.routes != null) {
             for (Direction dir : this.routes) {
                 turn(dir);
-                System.out.println(dir);
                 step(dir);
+                System.out.println(String.format("%6s [%d, %d]",dir, this.location.x , this.location.y));
             }
         }
     }
 
     private void goToPickUpStation() {
         int pickUpStationID = 101;
-        Point p = this.dependOnSortingZone.getMap().getComponent(pickUpStationID).getLocation();
+        Point p = this.dependOnSortingZone.getMap().getComponent("pickUpStation", pickUpStationID).getLocation();
         this.initRoutes(this.getLocation(), p);
         this.move();
+        this.loadPack(pickUpStationID);
+        System.out.println("--------------loadPack");
     }
 
     private void goToPutDownStation() {
-        Point p = this.dependOnSortingZone.getSortingComponent(putDownStationID).getLocation();
+        int putDownStation = this.pack.getDestination();
+        Point p = this.dependOnSortingZone.getMap().getComponent("putDownStation", putDownStation).getLocation();
         this.initRoutes(this.getLocation(), p);
+        this.move();
+        this.unloadPack();
+        System.out.println("--------------unloadPack");
     }
 
-    private void goToCharingStation() {
-        Point p = this.dependOnSortingZone.getSortingComponent(chargingStationID).getLocation();
+    private void goToChargingStation() {
+        int chargingStation = 301;
+        Point p = this.dependOnSortingZone.getMap().getComponent("chargingStation", chargingStation).getLocation();
         this.initRoutes(this.getLocation(), p);
+        this.move();
+        this.charging();
     }
 
     private void act() {
-        System.out.println(String.format("robot[%d] is running!", this.ID));
-        try {
-            // 检查当前是否持有包裹
-            if (this.pack == null) {
-                this.goToPickUpStation(101);
-            } else {
-
+        System.out.println(String.format("robot is running!"));
+        while (true){
+            try {
+                // 检查当前是否持有包裹
+                if (this.pack == null) {
+                    this.goToPickUpStation();
+                } else {
+                    this.goToPutDownStation();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            this.setPosition(new Point(1, 1));
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -242,13 +250,10 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         this.act();
     }
 
-
     public static void main(String[] args) {
         SortingZone zone = new SortingZone(6, 6);
-        SortingRobot robot = new SortingRobot(1, zone);
+        SortingRobot robot = new SortingRobot(new Point(1,1) ,zone);
         zone.getMap().print();
-
-
 
         Thread R1 = new Thread(robot);
         R1.start();

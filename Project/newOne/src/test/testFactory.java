@@ -1,10 +1,11 @@
 package test;
 
+
+import sortingFactoryRelated.SortingRobot;
+import sortingFactoryRelated.SortingZone;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.util.*;
-import java.util.Timer;
 
 public class testFactory extends JFrame {
 
@@ -13,7 +14,7 @@ public class testFactory extends JFrame {
     private final int mainCanvasWidth = 1000;
     private final int mainCanvasHeight = 800;
 
-    public testFactory() {
+    public testFactory(SortingZone sortingZone) {
         super();
         this.setTitle("canvas");
         this.setLayout(null);
@@ -45,7 +46,7 @@ public class testFactory extends JFrame {
         text_robotNum.setSize(100, 30);
         text_robotNum.setLocation(10, 100);
 
-        CanvasPanel canvas_main = new CanvasPanel(mainCanvasWidth, mainCanvasHeight);
+        CanvasPanel canvas_main = new CanvasPanel(mainCanvasWidth, mainCanvasHeight, sortingZone);
         canvas_main.setLocation(10, 10);
 
 
@@ -60,6 +61,8 @@ public class testFactory extends JFrame {
     }
 
     public static void main(String[] args) {
-        new testFactory();
+        SortingZone zone = new SortingZone(26, 26);
+        SortingRobot robot = new SortingRobot(new Point(1, 1), zone);
+        new testFactory(zone);
     }
 }

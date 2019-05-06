@@ -11,18 +11,31 @@ public class Map {
     private int verticalSCale;
     private Route[][] routes;
     private boolean[][] robotLayer;
-    private HashMap<Integer, SortingComponent> sortingComponents;
+    private HashMap<Integer, SortingComponent> pickUpStations;
+    private HashMap<Integer, SortingComponent> putDownStations;
+    private HashMap<Integer, SortingComponent> chargingStations;
+
+    public int getHorizontalSCale(){
+        return this.horizontalSCale;
+    }
+
+    public int getVerticalSCale(){
+        return this.verticalSCale;
+    }
 
     public Map(int horizontalSCale, int verticalSCale) {
         boolean up;
         boolean down;
         boolean left;
         boolean right;
-        this.routes = new Route[verticalSCale][horizontalSCale];
-        this.robotLayer = new boolean[verticalSCale][horizontalSCale];
-        this.sortingComponents = new HashMap<Integer, SortingComponent>();
         this.verticalSCale = verticalSCale;
         this.horizontalSCale = horizontalSCale;
+        this.routes = new Route[verticalSCale][horizontalSCale];
+        this.robotLayer = new boolean[verticalSCale][horizontalSCale];
+        this.pickUpStations = new HashMap<>();
+        this.putDownStations = new HashMap<>();
+        this.chargingStations = new HashMap<>();
+
         for (int h = 0; h < verticalSCale; h++) {
             if (h % 2 == 0) {
                 left = false;
@@ -110,8 +123,51 @@ public class Map {
         return null;
     }
 
-    public SortingComponent getComponent(int componentID) {
-        return this.sortingComponents.get(componentID) ;
+    public void addComponent(String name, Integer componentID, SortingComponent sortingComponent) {
+        switch (name) {
+            case "putDownStation":
+                this.putDownStations.put(componentID, sortingComponent);
+            case "pickUpStation":
+                this.pickUpStations.put(componentID, sortingComponent);
+            case "chargingStation":
+                this.chargingStations.put(componentID, sortingComponent);
+        }
+    }
+
+    /**
+     * @param name {"putDownStation","pickUpStation","chargingStation"}
+     * @return HashMap
+     */
+    public HashMap<Integer, SortingComponent> getComponents(String name) {
+        switch (name) {
+            case "putDownStation":
+                return this.putDownStations;
+            case "pickUpStation":
+                return this.pickUpStations;
+            case "chargingStation":
+                return this.chargingStations;
+        }
+        return null;
+    }
+
+    /**
+     * @param name        {"putDownStation","pickUpStation","chargingStation"}
+     * @param componentID ID of the SortingComponent
+     * @return SortingComponent
+     * @see PutDownStation
+     * @see PickUpStation
+     * @see ChargingStation
+     */
+    public SortingComponent getComponent(String name, Integer componentID) {
+        switch (name) {
+            case "putDownStation":
+                return this.putDownStations.get(componentID);
+            case "pickUpStation":
+                return this.pickUpStations.get(componentID);
+            case "chargingStation":
+                return this.chargingStations.get(componentID);
+        }
+        return null;
     }
 
     public static int getDistance(Point p1, Point p2, Direction dir) {

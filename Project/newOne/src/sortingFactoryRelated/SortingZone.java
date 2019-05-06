@@ -12,9 +12,13 @@ public class SortingZone {
 
     public SortingZone(int width, int height) {
         this.map = new Map(width, height);
-        this.width = width;
-        this.height = height;
         this.scale = 100;// 100/route
+        this.width = width * this.scale;
+        this.height = height * this.scale;
+        PutDownStation putDownStation0 = new PutDownStation(new Point(5,5), this);
+        this.map.addComponent("putDownStation" , 201,putDownStation0);
+        PickUpStation pickUpStation0 = new PickUpStation(new Point(2,2), this);
+        this.map.addComponent("pickUpStation" , 101,pickUpStation0);
     }
 
     public SortingRobot getSortingRobot(int ID) {
@@ -32,5 +36,17 @@ public class SortingZone {
 
     public int getScale() {
         return scale;
+    }
+
+    public ArrayList<SortingRobot> getSortingRobots( ) {
+        return this.sortingRobots;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
