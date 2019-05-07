@@ -1,11 +1,11 @@
 package sortingFactoryRelated;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.util.*;
 
 
 public class SortingRobot extends SortingComponent implements Runnable, Routable {
+
     /* 50 FPS */
     final int FPS = 50;
     final int delay = 1000 / this.FPS;
@@ -13,7 +13,8 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
     private int speed;
     private int spin;
     private Direction direction;
-    private int process;
+    private int loadProcess;
+    private int unloadProcess;
     private int efficiency;
 
     private Pack pack;
@@ -32,7 +33,6 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
     }
 
 
-
     public SortingRobot(Point location, SortingZone dependOnSortingZone) {
         super(location, dependOnSortingZone);
         this.power = 500;
@@ -41,7 +41,8 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         this.speed = this.dependOnSortingZone.getScale() / 10;   // 10 p/FPS
         this.spin = 5; // 5 degree/FPS
         this.direction = Direction.UP;
-        this.process = 0;
+        this.loadProcess = 0;
+        this.unloadProcess = 0;
     }
 
     private boolean initRoutes(Point origination, Point destination) {
@@ -56,15 +57,26 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
 
     private void loadPack(int pickUpStationID) {
         if (this.pack == null) {
+            this.loadProcess = 0;
             PickUpStation pickUpStation = (PickUpStation) this.dependOnSortingZone.getMap().getComponent("pickUpStation", pickUpStationID);
             this.pack = pickUpStation.getPack();
+            while (this.loadProcess < 100) {
+                this.loadProcess += 5;
+                this.stop();
+            }
         }
     }
 
     private void unloadPack() {
         if (this.pack != null) {
+            this.loadProcess = 0;
             this.pack = null;
+            while (this.loadProcess < 100) {
+                this.loadProcess += 5;
+                this.stop();
+            }
         }
+
     }
 
     private void charging() {
@@ -110,31 +122,30 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
     }
 
     private void step(Direction dir) {
-        boolean obstacle = false;
+        boolean obstacle = true;
         Point p = new Point(this.position);
         Point l = new Point(this.location);
         Route.setAsNextPoint(p, dir, this.dependOnSortingZone.getScale());
         Route.setAsNextPoint(l, dir, 1);
 
-        if (dir == Direction.LEFT || dir == Direction.RIGHT) {
-            Direction nextNodeDir = this.dependOnSortingZone.getMap().getRoute(l).getOtherPassableDirection(dir);
-            if (nextNodeDir == Direction.UP) {
+        while (obstacle) {
+            if (dir == Direction.LEFT || dir == Direction.RIGHT) {
+                Direction nextNodeDir = this.dependOnSortingZone.getMap().getRoute(l).getOtherPassableDirection(dir);
+                if (nextNodeDir == Direction.UP) {
+                    obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
+                    obstacle |= this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y - 1);
+                } else if (nextNodeDir == Direction.DOWN) {
+                    obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
+                    obstacle |= this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y + 1);
+                }
+            } else {
                 obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
-                obstacle |= this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y - 1);
-            } else if (nextNodeDir == Direction.DOWN) {
-                obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
-                obstacle |= this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y + 1);
             }
-        } else {
-            obstacle = this.dependOnSortingZone.getMap().getRobotLayer(l.x, l.y);
+            if (obstacle) {
+                this.stop();
+                //System.out.println("obstacle");
+            }
         }
-
-        if (obstacle) {
-            this.stop();
-            System.out.println("obstacle");
-            return;
-        }
-
         // 更新位置
         this.dependOnSortingZone.getMap().setRobotLayer(false, this.location.x, this.location.y);
         this.dependOnSortingZone.getMap().setRobotLayer(true, l.x, l.y);
@@ -195,7 +206,7 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
 
     private void act() {
         System.out.println(String.format("robot is running!"));
-        while (true){
+        while (true) {
             try {
                 // 检查当前是否持有包裹
                 if (this.pack == null) {
@@ -208,7 +219,6 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
             }
         }
     }
-
 
     @Override
     public Queue<Direction> routeSearch(Point origination, Point destination) {
@@ -252,7 +262,6 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
             }
             return routesTemp;
         }
-
     }
 
     @Override
@@ -262,13 +271,14 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
 
     public static void main(String[] args) {
         SortingZone zone = new SortingZone(6, 6);
-        SortingRobot robot = new SortingRobot(new Point(1,1) ,zone);
+        SortingRobot robot = new SortingRobot(new Point(1, 1), zone);
         zone.getMap().print();
 
         Thread R1 = new Thread(robot);
         R1.start();
 
     }
+
 }
 
 

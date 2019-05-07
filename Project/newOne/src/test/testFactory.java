@@ -6,6 +6,7 @@ import sortingFactoryRelated.SortingZone;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class testFactory extends JFrame {
 
@@ -14,7 +15,7 @@ public class testFactory extends JFrame {
     private final int mainCanvasWidth = 1000;
     private final int mainCanvasHeight = 800;
 
-    public testFactory(SortingZone sortingZone) {
+    public testFactory(SortingZone sortingZone) throws IOException {
         super();
         this.setTitle("canvas");
         this.setLayout(null);
@@ -66,7 +67,7 @@ public class testFactory extends JFrame {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         SortingZone zone = new SortingZone(26, 26);
         testFactory testFactory0 =  new testFactory(zone);
     }

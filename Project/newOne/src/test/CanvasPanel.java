@@ -1,20 +1,19 @@
 package test;
 
-import sortingFactoryRelated.Positionable;
-import sortingFactoryRelated.Route;
-import sortingFactoryRelated.SortingRobot;
-import sortingFactoryRelated.SortingZone;
+import sortingFactoryRelated.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class CanvasPanel extends JPanel {
     private Timer timer;
     private Dimension blockDimension;
     private Dimension mapDimension;
-    private boolean over= false;
+    private boolean over = false;
 
+    SortingView robotView;
     private Image showLayer;
     private Image bottomLayer;
     private Image middleLayer;
@@ -26,13 +25,17 @@ public class CanvasPanel extends JPanel {
     private Graphics2D GM;
     private Graphics2D GT;
 
-    public CanvasPanel(int width, int height, SortingZone sortingZone) {
+    public CanvasPanel(int width, int height, SortingZone sortingZone) throws IOException {
+
         this.setSize(width, height);
         this.setBackground(new Color(255, 255, 255));
         this.init();
         this.blockDimension = new Dimension(30, 30);
         this.sortingZone = sortingZone;
         this.mapDimension = new Dimension(30 * this.sortingZone.getMap().getHorizontalSCale(), 30 * this.sortingZone.getMap().getVerticalSCale());
+
+        this.robotView = new SortingView(this.blockDimension);
+        this.robotView.setView("src/img/robot.png");
     }
 
     public void init() {
@@ -58,15 +61,9 @@ public class CanvasPanel extends JPanel {
 
         this.GS.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //边缘抗锯齿
         this.GS.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON); //文本抗锯齿
-        this.GB.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        this.GB.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        this.GM.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        this.GM.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        this.GT.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        this.GT.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
 
-        this.timer = new Timer(20, e ->{
+        this.timer = new Timer(20, e -> {
             this.repaint();
         });
 
@@ -91,7 +88,7 @@ public class CanvasPanel extends JPanel {
     }
 
     public void drawBottomLayer() {
-        if (over){
+        if (over) {
             return;
         }
         int H = this.sortingZone.getMap().getVerticalSCale();
@@ -105,29 +102,52 @@ public class CanvasPanel extends JPanel {
                 GB.setColor(new Color(212, 212, 212));
                 GB.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 GB.setStroke(new BasicStroke(1f, BasicStroke.CAP_BUTT,
-                        BasicStroke.JOIN_ROUND, 0f, new float[] { 2 }, 0f));
+                        BasicStroke.JOIN_ROUND, 0f, new float[]{2}, 0f));
                 GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
             }
         }
+
+        for (SortingComponent sc : this.sortingZone.getMap().getComponents("putDownStation").values()) {
+            int x = this.blockDimension.width * sc.getLocation().x;
+            int y = this.mapDimension.height - this.blockDimension.height - this.blockDimension.height * sc.getLocation().y;
+            GB.setColor(new Color(255, 30, 175));
+            GB.setStroke(new BasicStroke(2f, BasicStroke.CAP_BUTT,
+                    BasicStroke.JOIN_ROUND, 0f, new float[]{2}, 0f));
+            GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
+        }
+
+        for (SortingComponent sc : this.sortingZone.getMap().getComponents("pickUpStation").values()) {
+            int x = this.blockDimension.width * sc.getLocation().x;
+            int y = this.mapDimension.height - this.blockDimension.height - this.blockDimension.height * sc.getLocation().y;
+            GB.setColor(new Color(14, 255, 7));
+            GB.setStroke(new BasicStroke(2f, BasicStroke.CAP_BUTT,
+                    BasicStroke.JOIN_ROUND, 0f, new float[]{2}, 0f));
+            GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
+        }
+
+
         GB.dispose();
         this.over = true;
 
     }
 
     public void drawMiddleLayer() {
-        Graphics2D G= (Graphics2D) this.middleLayer.getGraphics();
-        G.setBackground(new Color(0,0,0,0));
-        G.clearRect(0,0,this.getWidth(),this.getHeight());
+        Graphics2D G = (Graphics2D) this.middleLayer.getGraphics();
+        G.setBackground(new Color(0, 0, 0, 0));
+        G.clearRect(0, 0, this.getWidth(), this.getHeight());
         G.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //边缘抗锯齿
+
+        //G.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_DEFAULT);
 
         for (SortingRobot robot : this.sortingZone.getSortingRobots()) {
             int x = this.mapDimension.width * robot.getPosition().x / this.sortingZone.getWidth();
             int y = this.mapDimension.height - this.blockDimension.height - this.mapDimension.height * robot.getPosition().y / this.sortingZone.getHeight();
-            double degree = (robot.getDegree() * Math.PI / 180);
-            G.setColor(new Color(39, 75, 255));
+            double degree =  Math.toRadians(robot.getDegree());
+            //G.setColor(new Color(39, 75, 255));
             G.rotate(degree, x + this.blockDimension.width / 2, y + this.blockDimension.height / 2);
-            G.fillRoundRect(x, y, this.blockDimension.width, this.blockDimension.height, this.blockDimension.width / 2, this.blockDimension.height / 2);
-            System.out.println(String.format("[%d, %d]", x,y));
+            G.drawImage(this.robotView.view, x, y, null);
+            //G.fillRoundRect(x, y, this.blockDimension.width, this.blockDimension.height, this.blockDimension.width / 2, this.blockDimension.height / 2);
+            //System.out.println(String.format("[%d, %d]", x, y));
             G.rotate(-degree, x + this.blockDimension.width / 2, y + this.blockDimension.height / 2);
         }
 

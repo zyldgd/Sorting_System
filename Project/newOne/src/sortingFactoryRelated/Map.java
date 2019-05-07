@@ -127,10 +127,13 @@ public class Map {
         switch (name) {
             case "putDownStation":
                 this.putDownStations.put(componentID, sortingComponent);
+                break;
             case "pickUpStation":
                 this.pickUpStations.put(componentID, sortingComponent);
+                break;
             case "chargingStation":
                 this.chargingStations.put(componentID, sortingComponent);
+                break;
         }
     }
 
