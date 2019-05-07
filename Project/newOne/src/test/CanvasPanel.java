@@ -13,6 +13,7 @@ public class CanvasPanel extends JPanel {
     private Timer timer;
     private Dimension blockDimension;
     private Dimension mapDimension;
+    private boolean over= false;
 
     private Image showLayer;
     private Image bottomLayer;
@@ -64,11 +65,13 @@ public class CanvasPanel extends JPanel {
         this.GT.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         this.GT.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
+
         this.timer = new Timer(20, e ->{
             this.repaint();
         });
 
         this.timer.start();
+
     }
 
     public void mergeLayers() {
@@ -88,6 +91,9 @@ public class CanvasPanel extends JPanel {
     }
 
     public void drawBottomLayer() {
+        if (over){
+            return;
+        }
         int H = this.sortingZone.getMap().getVerticalSCale();
         int W = this.sortingZone.getMap().getHorizontalSCale();
 
@@ -103,17 +109,9 @@ public class CanvasPanel extends JPanel {
                 GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
             }
         }
+        GB.dispose();
+        this.over = true;
 
-    }
-
-
-    private void drawUnit(Graphics2D g, Positionable Unit) {
-        int x = this.mapDimension.width * Unit.getPosition().x / this.sortingZone.getWidth();
-        int y = this.mapDimension.height - this.blockDimension.height - this.mapDimension.height * Unit.getPosition().y / this.sortingZone.getHeight();
-        g.setColor(new Color(39, 75, 255));
-        g.rotate(Unit.getDegree() * Math.PI / 180, x + this.blockDimension.width / 2, y + this.blockDimension.height / 2);
-        g.fillRoundRect(x, y, this.blockDimension.width, this.blockDimension.height, this.blockDimension.width / 2, this.blockDimension.height / 2);
-        g.dispose();
     }
 
     public void drawMiddleLayer() {
