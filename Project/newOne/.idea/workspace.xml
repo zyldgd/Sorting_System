@@ -17,17 +17,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+            <state relative-caret-position="209">
+              <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
               <folding>
-                <element signature="method#Map#0;class#Map#0" />
-                <element signature="method#isPassable#0;class#Map#0" />
-                <element signature="method#setRobotLayer#0;class#Map#0" />
-                <element signature="method#getRobotLayer#0;class#Map#0" />
-                <element signature="method#getRoute#0;class#Map#0" />
-                <element signature="method#getNextPoint#0;class#Map#0" />
-                <element signature="method#addComponent#0;class#Map#0" />
-                <element signature="method#getComponent#0;class#Map#0" />
+                <element signature="e#2815#2816#0" expanded="true" />
                 <element signature="method#getDistance#0;class#Map#0" />
                 <element signature="method#print#0;class#Map#0" />
               </folding>
@@ -38,24 +31,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/Route.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-906">
-              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+            <state relative-caret-position="574">
+              <caret line="62" column="5" lean-forward="true" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
               <folding>
                 <element signature="method#numberOfPassable#0;class#Route#0" />
+                <element signature="method#isPassable#0;class#Route#0" />
+                <element signature="e#1339#1817#0" />
                 <element signature="method#getOnePassableDirection#0;class#Route#0" />
                 <element signature="method#getOtherPassableDirection#0;class#Route#0" />
+                <element signature="method#setAsNextPoint#0;class#Route#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/testFactory.java">
+        <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingRobot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="633">
-              <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+            <state relative-caret-position="723">
+              <caret line="233" column="59" lean-forward="true" selection-start-line="233" selection-start-column="59" selection-end-line="233" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#589#590#0" expanded="true" />
+                <element signature="e#620#621#0" expanded="true" />
+                <element signature="e#669#670#0" expanded="true" />
+                <element signature="e#709#710#0" expanded="true" />
+                <element signature="e#6953#6964#0" expanded="true" />
+                <element signature="e#8598#8599#0" expanded="true" />
+                <element signature="e#8624#8625#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,7 +67,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/CanvasPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="656">
               <caret line="112" column="24" selection-start-line="112" selection-start-column="24" selection-end-line="112" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -74,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/Main.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/testFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2743">
-              <caret line="207" column="37" selection-start-line="207" selection-start-column="36" selection-end-line="207" selection-end-column="37" />
+            <state relative-caret-position="1311">
+              <caret line="69" column="51" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -87,27 +90,30 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingRobot.java">
+        <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/Positionable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+            <state relative-caret-position="57">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/Routable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="6" column="76" selection-start-line="6" selection-start-column="76" selection-end-line="6" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingZone.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#558#559#0" expanded="true" />
-                <element signature="e#589#590#0" expanded="true" />
-                <element signature="e#638#639#0" expanded="true" />
-                <element signature="e#678#679#0" expanded="true" />
-                <element signature="method#initRoutes#0;class#SortingRobot#0" />
-                <element signature="method#loadPack#0;class#SortingRobot#0" />
-                <element signature="method#unloadPack#0;class#SortingRobot#0" />
-                <element signature="method#charging#0;class#SortingRobot#0" />
-                <element signature="method#turn#0;class#SortingRobot#0" />
-                <element signature="method#step#0;class#SortingRobot#0" />
-                <element signature="method#stop#0;class#SortingRobot#0" />
-                <element signature="method#move#0;class#SortingRobot#0" />
-                <element signature="method#routeSearch#0;class#SortingRobot#0" />
-                <element signature="e#8395#8396#0" expanded="true" />
-                <element signature="e#8421#8422#0" expanded="true" />
+                <element signature="e#1176#1177#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,31 +122,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingComponent.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="84" column="11" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#SortingComponent#0;class#SortingComponent#0" />
-                <element signature="method#setDependOnSortingZone#0;class#SortingComponent#0" />
-                <element signature="class#ChargingStation#0" />
-                <element signature="method#ChargingStation#0;class#ChargingStation#0" />
-                <element signature="e#1847#1848#0" expanded="true" />
-                <element signature="e#1899#1900#0" expanded="true" />
-                <element signature="method#getPack#0;class#PickUpStation#0" />
-              </folding>
+            <state relative-caret-position="570">
+              <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingZone.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/awt/Point.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="39" column="61" selection-start-line="39" selection-start-column="61" selection-end-line="39" selection-end-column="61" />
-              <folding>
-                <element signature="e#932#933#0" expanded="true" />
-                <element signature="e#984#985#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-542">
+              <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -168,18 +160,18 @@
         <option value="$PROJECT_DIR$/src/sortingFactoryRelated/SortingComponent.java" />
         <option value="$PROJECT_DIR$/src/test/Main.java" />
         <option value="$PROJECT_DIR$/src/sortingFactoryRelated/Map.java" />
-        <option value="$PROJECT_DIR$/src/test/testFactory.java" />
         <option value="$PROJECT_DIR$/src/sortingFactoryRelated/SortingRobot.java" />
         <option value="$PROJECT_DIR$/src/test/CanvasPanel.java" />
         <option value="$PROJECT_DIR$/src/sortingFactoryRelated/SortingZone.java" />
+        <option value="$PROJECT_DIR$/src/test/testFactory.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="14" />
-    <option name="y" value="-19" />
-    <option name="width" value="1934" />
-    <option name="height" value="1050" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="17" />
+    <option name="y" value="-17" />
+    <option name="width" value="1932" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -187,7 +179,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -211,6 +202,13 @@
               <item name="newOne" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sortingFactoryRelated" type="462c0819:PsiDirectoryNode" />
+              <item name="Route.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
+            <path>
+              <item name="newOne" type="b2602c69:ProjectViewProjectNode" />
+              <item name="newOne" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="sortingFactoryRelated" type="462c0819:PsiDirectoryNode" />
               <item name="SortingComponent.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
             <path>
@@ -223,6 +221,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -333,10 +332,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1563" height="855" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19720186" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2563966" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -394,30 +393,29 @@
   <component name="editorHistoryManager">
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Thread.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/lang/Boolean.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/awt/geom/Point2D.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/awt/Point.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Random.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/awt/geom/Point2D.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="103" column="11" selection-start-line="103" selection-start-column="11" selection-end-line="103" selection-end-column="11" />
+        <state relative-caret-position="266">
+          <caret line="48" column="29" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="29" />
           <folding>
-            <element signature="e#3504#3505#0" expanded="true" />
-            <element signature="e#3562#3563#0" expanded="true" />
+            <element signature="docComment;class#Point2D#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/HashMap.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_171/src.zip!/java/awt/Point.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="133" column="21" selection-start-line="133" selection-start-column="12" selection-end-line="133" selection-end-column="21" />
+        <state relative-caret-position="-542">
+          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/Random.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/HashMap.java" />
     <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/Positionable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -439,40 +437,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/image/ImageObserver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="413">
-          <caret line="82" column="18" lean-forward="true" selection-start-line="82" selection-start-column="18" selection-end-line="82" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/AlphaComposite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="538" column="39" selection-start-line="538" selection-start-column="39" selection-end-line="538" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/peer/ComponentPeer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="380" column="51" selection-start-line="380" selection-start-column="38" selection-end-line="380" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Component.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="3579" column="44" lean-forward="true" selection-start-line="3579" selection-start-column="44" selection-end-line="3579" selection-end-column="44" />
-          <folding>
-            <element signature="e#84656#84657#0" expanded="true" />
-            <element signature="e#84684#84685#0" expanded="true" />
-            <element signature="e#85059#85060#0" expanded="true" />
-            <element signature="e#85088#85089#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/image/ImageObserver.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/AlphaComposite.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/peer/ComponentPeer.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Component.java" />
     <entry file="file://$PROJECT_DIR$/src/test/canvas.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -487,75 +455,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/event/ActionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/Timer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="203" column="26" selection-start-line="203" selection-start-column="21" selection-end-line="203" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Dimension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-110">
-          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Graphics2D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="420" column="14" selection-start-line="420" selection-start-column="14" selection-end-line="420" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Graphics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="162" column="26" selection-start-line="162" selection-start-column="20" selection-end-line="162" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/event/ActionListener.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/javax/swing/Timer.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Dimension.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Graphics2D.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Graphics.java" />
     <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/Map.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        <state relative-caret-position="209">
+          <caret line="13" column="62" selection-start-line="13" selection-start-column="62" selection-end-line="13" selection-end-column="62" />
           <folding>
-            <element signature="method#Map#0;class#Map#0" />
-            <element signature="method#isPassable#0;class#Map#0" />
-            <element signature="method#setRobotLayer#0;class#Map#0" />
-            <element signature="method#getRobotLayer#0;class#Map#0" />
-            <element signature="method#getRoute#0;class#Map#0" />
-            <element signature="method#getNextPoint#0;class#Map#0" />
-            <element signature="method#addComponent#0;class#Map#0" />
-            <element signature="method#getComponent#0;class#Map#0" />
+            <element signature="e#2815#2816#0" expanded="true" />
             <element signature="method#getDistance#0;class#Map#0" />
             <element signature="method#print#0;class#Map#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Image.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-224">
-          <caret line="107" column="29" selection-start-line="107" selection-start-column="29" selection-end-line="107" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/awt/Image.java" />
     <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/Route.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-906">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        <state relative-caret-position="574">
+          <caret line="62" column="5" lean-forward="true" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
           <folding>
             <element signature="method#numberOfPassable#0;class#Route#0" />
+            <element signature="method#isPassable#0;class#Route#0" />
+            <element signature="e#1339#1817#0" />
             <element signature="method#getOnePassableDirection#0;class#Route#0" />
             <element signature="method#getOtherPassableDirection#0;class#Route#0" />
+            <element signature="method#setAsNextPoint#0;class#Route#0" />
           </folding>
         </state>
       </provider>
@@ -572,42 +500,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingRobot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="16" />
+        <state relative-caret-position="723">
+          <caret line="233" column="59" lean-forward="true" selection-start-line="233" selection-start-column="59" selection-end-line="233" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#558#559#0" expanded="true" />
             <element signature="e#589#590#0" expanded="true" />
-            <element signature="e#638#639#0" expanded="true" />
-            <element signature="e#678#679#0" expanded="true" />
-            <element signature="method#initRoutes#0;class#SortingRobot#0" />
-            <element signature="method#loadPack#0;class#SortingRobot#0" />
-            <element signature="method#unloadPack#0;class#SortingRobot#0" />
-            <element signature="method#charging#0;class#SortingRobot#0" />
-            <element signature="method#turn#0;class#SortingRobot#0" />
-            <element signature="method#step#0;class#SortingRobot#0" />
-            <element signature="method#stop#0;class#SortingRobot#0" />
-            <element signature="method#move#0;class#SortingRobot#0" />
-            <element signature="method#routeSearch#0;class#SortingRobot#0" />
-            <element signature="e#8395#8396#0" expanded="true" />
-            <element signature="e#8421#8422#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#669#670#0" expanded="true" />
+            <element signature="e#709#710#0" expanded="true" />
+            <element signature="e#6953#6964#0" expanded="true" />
+            <element signature="e#8598#8599#0" expanded="true" />
+            <element signature="e#8624#8625#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/testFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingComponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
-          <caret line="62" column="38" selection-start-line="62" selection-start-column="38" selection-end-line="62" selection-end-column="38" />
+        <state relative-caret-position="570">
+          <caret line="30" column="17" selection-start-line="30" selection-start-column="17" selection-end-line="30" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingZone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1176#1177#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/CanvasPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state relative-caret-position="656">
           <caret line="112" column="24" selection-start-line="112" selection-start-column="24" selection-end-line="112" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -616,30 +543,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingComponent.java">
+    <entry file="file://$PROJECT_DIR$/src/test/testFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="84" column="11" selection-start-line="84" selection-start-column="11" selection-end-line="84" selection-end-column="11" />
+        <state relative-caret-position="1311">
+          <caret line="69" column="51" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#SortingComponent#0;class#SortingComponent#0" />
-            <element signature="method#setDependOnSortingZone#0;class#SortingComponent#0" />
-            <element signature="class#ChargingStation#0" />
-            <element signature="method#ChargingStation#0;class#ChargingStation#0" />
-            <element signature="e#1847#1848#0" expanded="true" />
-            <element signature="e#1899#1900#0" expanded="true" />
-            <element signature="method#getPack#0;class#PickUpStation#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sortingFactoryRelated/SortingZone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="39" column="61" selection-start-line="39" selection-start-column="61" selection-end-line="39" selection-end-column="61" />
-          <folding>
-            <element signature="e#932#933#0" expanded="true" />
-            <element signature="e#984#985#0" expanded="true" />
           </folding>
         </state>
       </provider>

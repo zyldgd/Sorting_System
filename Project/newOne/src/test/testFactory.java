@@ -68,7 +68,6 @@ public class testFactory extends JFrame {
 
     public static void main(String[] args) {
         SortingZone zone = new SortingZone(26, 26);
-
         testFactory testFactory0 =  new testFactory(zone);
     }
 }
