@@ -58,11 +58,17 @@ public class testFactory extends JFrame {
         this.add(panel_right);
 
         this.setVisible(true);
+
+        for (SortingRobot robot:sortingZone.getSortingRobots()){
+            new Thread(robot).start();
+        }
+
+
     }
 
     public static void main(String[] args) {
         SortingZone zone = new SortingZone(26, 26);
-        SortingRobot robot = new SortingRobot(new Point(1, 1), zone);
-        new testFactory(zone);
+
+        testFactory testFactory0 =  new testFactory(zone);
     }
 }

@@ -16,11 +16,21 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
     private int process;
     private int efficiency;
 
-
     private Pack pack;
     private Queue<Direction> routes;
     private int power;// 当前电量
     private int capacitance;// 电容量
+
+    private Integer pickUpID;
+
+    public Integer getPickUpID() {
+        return pickUpID;
+    }
+
+    public void setPickUpID(Integer pickUpID) {
+        this.pickUpID = pickUpID;
+    }
+
 
 
     public SortingRobot(Point location, SortingZone dependOnSortingZone) {
@@ -152,18 +162,18 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
             for (Direction dir : this.routes) {
                 turn(dir);
                 step(dir);
-                System.out.println(String.format("%6s [%d, %d]",dir, this.location.x , this.location.y));
+                //System.out.println(String.format("%6s [%d, %d]",dir, this.location.x , this.location.y));
             }
         }
     }
 
     private void goToPickUpStation() {
-        int pickUpStationID = 101;
+        int pickUpStationID = this.pickUpID;
         Point p = this.dependOnSortingZone.getMap().getComponent("pickUpStation", pickUpStationID).getLocation();
         this.initRoutes(this.getLocation(), p);
         this.move();
         this.loadPack(pickUpStationID);
-        System.out.println("--------------loadPack");
+        //System.out.println("--------------loadPack");
     }
 
     private void goToPutDownStation() {
@@ -172,7 +182,7 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         this.initRoutes(this.getLocation(), p);
         this.move();
         this.unloadPack();
-        System.out.println("--------------unloadPack");
+        //System.out.println("--------------unloadPack");
     }
 
     private void goToChargingStation() {

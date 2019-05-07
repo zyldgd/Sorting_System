@@ -64,25 +64,27 @@ public class CanvasPanel extends JPanel {
         this.GT.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         this.GT.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        this.timer = new Timer(20, e -> this.repaint());
+        this.timer = new Timer(20, e ->{
+            this.repaint();
+        });
 
         this.timer.start();
     }
 
     public void mergeLayers() {
         this.GS.clearRect(0, 0, this.getWidth(), this.getHeight());
-        this.GS.drawImage(this.bottomLayer, 0, 0, null);
-        this.GS.drawImage(this.middleLayer, 0, 0, null);
-        this.GS.drawImage(this.topLayer, 0, 0, null);
+        this.GS.drawImage(this.bottomLayer, 0, 0, this);
+        this.GS.drawImage(this.middleLayer, 0, 0, this);
+        //this.GS.drawImage(this.topLayer, 0, 0, null);
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
         this.drawBottomLayer();
-        //this.drawMiddleLayer();
+        this.drawMiddleLayer();
         this.mergeLayers();
-        g.drawImage(this.showLayer, 0, 0, null);
+        g.drawImage(this.showLayer, 0, 0, this);
     }
 
     public void drawBottomLayer() {
@@ -115,13 +117,20 @@ public class CanvasPanel extends JPanel {
     }
 
     public void drawMiddleLayer() {
+        Graphics2D G= (Graphics2D) this.middleLayer.getGraphics();
+        G.setBackground(new Color(0,0,0,0));
+        G.clearRect(0,0,this.getWidth(),this.getHeight());
+        G.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //边缘抗锯齿
+
         for (SortingRobot robot : this.sortingZone.getSortingRobots()) {
             int x = this.mapDimension.width * robot.getPosition().x / this.sortingZone.getWidth();
             int y = this.mapDimension.height - this.blockDimension.height - this.mapDimension.height * robot.getPosition().y / this.sortingZone.getHeight();
-            this.GM.setColor(new Color(39, 75, 255));
-            this.GM.rotate(robot.getDegree() * Math.PI / 180, x + this.blockDimension.width / 2, y + this.blockDimension.height / 2);
-            this.GM.fillRoundRect(x, y, this.blockDimension.width, this.blockDimension.height, this.blockDimension.width / 2, this.blockDimension.height / 2);
-            this.GM.dispose();
+            double degree = (robot.getDegree() * Math.PI / 180);
+            G.setColor(new Color(39, 75, 255));
+            G.rotate(degree, x + this.blockDimension.width / 2, y + this.blockDimension.height / 2);
+            G.fillRoundRect(x, y, this.blockDimension.width, this.blockDimension.height, this.blockDimension.width / 2, this.blockDimension.height / 2);
+            System.out.println(String.format("[%d, %d]", x,y));
+            G.rotate(-degree, x + this.blockDimension.width / 2, y + this.blockDimension.height / 2);
         }
 
 //        GM.clearRect(0, 0, this.getWidth(), this.getHeight());
