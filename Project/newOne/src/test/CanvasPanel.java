@@ -68,7 +68,7 @@ public class CanvasPanel extends JPanel {
         this.GS.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON); //文本抗锯齿
 
 
-        this.timer = new Timer(15, e -> {
+        this.timer = new Timer(18, e -> {
             this.repaint();
         });
 
