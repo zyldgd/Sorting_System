@@ -38,7 +38,7 @@ public class SortingRobot extends SortingComponent implements Runnable, Routable
         this.power = 500;
         this.capacitance = 500;
         this.dependOnSortingZone = dependOnSortingZone;
-        this.speed = this.dependOnSortingZone.getScale() / 10;   // 10 p/FPS
+        this.speed = this.dependOnSortingZone.getScale() / 5;   // 10 p/FPS
         this.spin = 5; // 5 degree/FPS
         this.direction = Direction.UP;
         this.loadProcess = 0;

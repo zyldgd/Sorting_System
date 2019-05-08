@@ -14,6 +14,8 @@ public class CanvasPanel extends JPanel {
     private boolean over = false;
 
     SortingView robotView;
+    SortingView blockView;
+
     private Image showLayer;
     private Image bottomLayer;
     private Image middleLayer;
@@ -36,6 +38,9 @@ public class CanvasPanel extends JPanel {
 
         this.robotView = new SortingView(this.blockDimension);
         this.robotView.setView("src/img/robot.png");
+
+        this.blockView = new SortingView(this.blockDimension);
+        this.blockView.setView("src/img/block2.png");
     }
 
     public void init() {
@@ -63,7 +68,7 @@ public class CanvasPanel extends JPanel {
         this.GS.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON); //文本抗锯齿
 
 
-        this.timer = new Timer(20, e -> {
+        this.timer = new Timer(15, e -> {
             this.repaint();
         });
 
@@ -103,7 +108,9 @@ public class CanvasPanel extends JPanel {
                 GB.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 GB.setStroke(new BasicStroke(1f, BasicStroke.CAP_BUTT,
                         BasicStroke.JOIN_ROUND, 0f, new float[]{2}, 0f));
-                GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
+
+                GB.drawImage(this.blockView.view, x, y, null);
+                //GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
             }
         }
 
