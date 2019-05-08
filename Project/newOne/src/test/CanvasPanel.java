@@ -15,6 +15,8 @@ public class CanvasPanel extends JPanel {
 
     SortingView robotView;
     SortingView blockView;
+    SortingView pickUpStationView;
+    SortingView putDownStationView;
 
     private Image showLayer;
     private Image bottomLayer;
@@ -37,10 +39,18 @@ public class CanvasPanel extends JPanel {
         this.mapDimension = new Dimension(30 * this.sortingZone.getMap().getHorizontalSCale(), 30 * this.sortingZone.getMap().getVerticalSCale());
 
         this.robotView = new SortingView(this.blockDimension);
-        this.robotView.setView("src/img/robot.png");
+        this.robotView.setView("src/img/robot3.png");
 
         this.blockView = new SortingView(this.blockDimension);
-        this.blockView.setView("src/img/block2.png");
+        this.blockView.setView("src/img/block.png");
+
+        this.pickUpStationView = new SortingView(this.blockDimension);
+        this.pickUpStationView.setView("src/img/pickUpStation.png");
+
+        this.putDownStationView = new SortingView(this.blockDimension);
+        this.putDownStationView.setView("src/img/putDownStation.png");
+
+
     }
 
     public void init() {
@@ -120,7 +130,8 @@ public class CanvasPanel extends JPanel {
             GB.setColor(new Color(255, 30, 175));
             GB.setStroke(new BasicStroke(2f, BasicStroke.CAP_BUTT,
                     BasicStroke.JOIN_ROUND, 0f, new float[]{2}, 0f));
-            GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
+            GB.drawImage(this.putDownStationView.view, x, y, null);
+            //GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
         }
 
         for (SortingComponent sc : this.sortingZone.getMap().getComponents("pickUpStation").values()) {
@@ -129,7 +140,8 @@ public class CanvasPanel extends JPanel {
             GB.setColor(new Color(14, 255, 7));
             GB.setStroke(new BasicStroke(2f, BasicStroke.CAP_BUTT,
                     BasicStroke.JOIN_ROUND, 0f, new float[]{2}, 0f));
-            GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
+            GB.drawImage(this.pickUpStationView.view, x, y, null);
+            //GB.drawRect(x, y, this.blockDimension.width, this.blockDimension.height);
         }
 
 
