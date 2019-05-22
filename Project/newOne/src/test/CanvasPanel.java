@@ -34,9 +34,9 @@ public class CanvasPanel extends JPanel {
         this.setSize(width, height);
         this.setBackground(new Color(255, 255, 255));
         this.init();
-        this.blockDimension = new Dimension(30, 30);
+        this.blockDimension = new Dimension(25, 25);
         this.sortingZone = sortingZone;
-        this.mapDimension = new Dimension(30 * this.sortingZone.getMap().getHorizontalSCale(), 30 * this.sortingZone.getMap().getVerticalSCale());
+        this.mapDimension = new Dimension(25 * this.sortingZone.getMap().getHorizontalSCale(), 25 * this.sortingZone.getMap().getVerticalSCale());
 
         this.robotView = new SortingView(this.blockDimension);
         this.robotView.setView("src/img/robot3.png");

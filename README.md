@@ -29,3 +29,4 @@
 | 速度          | int           | speed  |
 | 转速          | int           | spin   |
 | 转速          | int           | spin   |
+

@@ -10,10 +10,10 @@ import java.io.IOException;
 
 public class testFactory extends JFrame {
 
-    private final int windowWidth = 1240;
-    private final int windowHeight = 870;
-    private final int mainCanvasWidth = 1000;
-    private final int mainCanvasHeight = 800;
+    private final int windowWidth = 900;
+    private final int windowHeight = 700;
+    private final int mainCanvasWidth = 700;
+    private final int mainCanvasHeight = 700;
 
     public testFactory(SortingZone sortingZone) throws IOException {
         super();
@@ -48,7 +48,7 @@ public class testFactory extends JFrame {
         text_robotNum.setLocation(10, 100);
 
         CanvasPanel canvas_main = new CanvasPanel(mainCanvasWidth, mainCanvasHeight, sortingZone);
-        canvas_main.setLocation(10, 10);
+        canvas_main.setLocation(0, 0);
 
 
         panel_left.add(btn_start);
